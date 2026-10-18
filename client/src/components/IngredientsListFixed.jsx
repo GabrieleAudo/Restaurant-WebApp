@@ -1,0 +1,99 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Table, Spinner } from 'react-bootstrap';
+
+function IngredientsListFixed(props) { //fixed ingredient list for display in the home page
+    if (props.loading) {
+        return (  //if page is loading, display a loading animation
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
+                <Spinner />
+            </div>
+        )
+    }
+    else {
+        return (
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <th>Requiremets</th>
+                        <th>Incompatibilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        props.ingredients.map((ingredient) =>
+                            <IngredientRow
+                                ingredientObj={ingredient}
+                                key={ingredient.name}
+                            />)
+                    }
+                </tbody>
+            </Table>
+        )
+    }
+
+}
+
+function IngredientRow(props) {
+
+    const ingredient = {
+        id: props.ingredientObj.id,
+        name: props.ingredientObj.name,
+        price: props.ingredientObj.price,
+        limited: props.ingredientObj.limited,
+        quantity: props.ingredientObj.quantity,
+        required: props.ingredientObj.required,
+        incompatible: props.ingredientObj.incompatible
+    }
+
+    return (
+        <tr>
+            <td>
+                <p>{ingredient.name}</p>
+            </td>
+            <td>
+                <p>{"+ " + ingredient.price.toFixed(2) + " €"}</p>
+            </td>
+            <td>
+                <Quantity limited={ingredient.limited} quantity={ingredient.quantity} />
+            </td>
+            <td>
+                <Constraints constraints={ingredient.required} />
+            </td>
+            <td>
+                <Constraints constraints={ingredient.incompatible} />
+            </td>
+
+        </tr>
+    )
+}
+
+function Quantity(props) {
+    let output = ""
+    if (props.limited) {
+        output = "" + props.quantity;
+    } else {
+        output = "unlimited"
+    }
+    return (
+        <p>{output}</p>
+    )
+}
+
+function Constraints(props) {//prints required and incompatible lists
+    let output = ""
+    for (let i = 0; i < props.constraints.length; i++) {
+        if (i != 0) {
+            output += ","
+        }
+        output += props.constraints[i]
+    }
+    return (
+        <p>{output}</p>
+    )
+}
+
+
+export default IngredientsListFixed;

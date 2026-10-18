@@ -1,0 +1,31 @@
+# This file could be used for testing the API with Visual Studio Code
+
+## Retrieve all the ingredients
+GET http://localhost:3001/api/ingredients HTTP/1.1
+###
+
+GET http://localhost:3001/api/dishes HTTP/1.1
+###
+
+GET http://localhost:3001/api/sizes HTTP/1.1
+###
+
+GET http://localhost:3001/api/orders HTTP/1.1
+###
+POST http://localhost:3001/api/orders HTTP/1.1
+content-type: application/json
+
+{
+    "dish": "dish-pizza",
+    "size": "",
+    "total": 7.2,
+    "ingredients": [
+      "ham",
+      "tuna",
+      "olives"
+    ]
+}
+###
+
+DELETE http://localhost:3001/api/orders/ciao HTTP/1.1
+###
