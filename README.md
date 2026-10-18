@@ -1,5 +1,5 @@
 # Project Title: "Restaurant WebApp"
-## Student: sXXXXXX AUDO GABRIELE 
+## Student: AUDO GABRIELE 
 
 ## React Client Application Routes
 
